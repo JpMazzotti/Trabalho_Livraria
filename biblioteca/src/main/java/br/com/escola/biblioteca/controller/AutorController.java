@@ -1,4 +1,4 @@
-package main.java.br.com.escola.biblioteca.controller;
+package br.com.escola.biblioteca.controller;
 public class AutorController {
     
 }
