@@ -1,4 +1,4 @@
-package main.java.br.com.escola.biblioteca.config;
+package br.com.escola.biblioteca.config;
 
 public class SwaggerConfig {
     

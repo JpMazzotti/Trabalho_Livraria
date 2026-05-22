@@ -1,5 +1,11 @@
-package main.java.br.com.escola.biblioteca.repository;
+package br.com.escola.biblioteca.repository;
 
-public class LivroRepository {
-    
+import br.com.escola.biblioteca.entity.Livro;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface LivroRepository extends JpaRepository<Livro, Long> {
+   
 }
+

@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "livro")
 public class Livro {
 
+<<<<<<< HEAD
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -48,4 +49,11 @@ public class Livro {
 
     public Autor getAutor() { return autor; }
     public void setAutor(Autor autor) { this.autor = autor; }
+=======
+    public void setAutor(Autor autor) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setAutor'");
+    }
+    
+>>>>>>> 2586b92e9f690bdf6d8fdcf8161ca91bd9716b57
 }

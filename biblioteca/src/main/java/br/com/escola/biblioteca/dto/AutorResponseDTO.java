@@ -1,4 +1,4 @@
-package main.java.br.com.escola.biblioteca.dto;
+package br.com.escola.biblioteca.dto;
 
 public class AutorResponseDTO {
     

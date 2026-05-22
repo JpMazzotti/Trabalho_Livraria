@@ -1,4 +1,4 @@
-package main.java.br.com.escola.biblioteca.service;
+package br.com.escola.biblioteca.service;
 
 public class AutorService {
     
