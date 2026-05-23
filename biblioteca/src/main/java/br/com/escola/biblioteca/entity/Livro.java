@@ -13,11 +13,17 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotBlank(message ="Não permitido título vazio")
+    @Column(name = "titulo",nullable = false)
     private String titulo;
 
+    @Column(name = "isbn")
     private String isbn;
+
+    @Column(name = "anoPublicacao")
     private Integer anoPublicacao;
+
+    @Column(name ="genero")
     private String genero;
 
     @ManyToOne
