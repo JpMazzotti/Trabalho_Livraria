@@ -1,6 +1,6 @@
 package br.com.escola.biblioteca.dto;
 
-import jakarta.time.LocalDate;
+import java.time.LocalDate;
 
 public record AutorRequestDTO(
     String nome,
