@@ -1,10 +1,13 @@
 package br.com.escola.biblioteca.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 
 @Entity
 @Table(name = "livro")
 public class Livro {
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
