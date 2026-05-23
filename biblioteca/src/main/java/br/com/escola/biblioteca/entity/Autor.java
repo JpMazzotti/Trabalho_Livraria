@@ -11,8 +11,6 @@ import java.util.List;
 @Table(name = "autor")
 public class Autor {
 
-    
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long autor_id;
