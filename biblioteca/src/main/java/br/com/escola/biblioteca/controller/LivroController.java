@@ -18,13 +18,7 @@ public class LivroController {
         this.livroService = livroService;
     }
 
-    @PostMapping
-    public ResponseEntity<LivroResponseDTO> criar(@RequestBody LivroRequestDTO dto) {
-        LivroResponseDTO response = livroService.salvandoLivro(dto);
-        return ResponseEntity.ok(response);
-    }
-
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<LivroResponseDTO>> listarTodos() {
         return ResponseEntity.ok(livroService.buscarTodos());
     }
@@ -34,13 +28,19 @@ public class LivroController {
         return ResponseEntity.ok(livroService.buscarPorId(id));
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/adicionar")
+    public ResponseEntity<LivroResponseDTO> criar(@RequestBody LivroRequestDTO dto) {
+        LivroResponseDTO response = livroService.salvandoLivro(dto);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<LivroResponseDTO> atualizar(@PathVariable Long id, @RequestBody LivroRequestDTO dto) {
         LivroResponseDTO response = livroService.atualizar(id, dto);
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/remover/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         livroService.deletar(id);
         return ResponseEntity.noContent().build();

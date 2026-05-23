@@ -18,13 +18,7 @@ public class AutorController {
         this.autorService = autorService;
     }
 
-    @PostMapping
-    public ResponseEntity<AutorResponseDTO> criar(@RequestBody AutorRequestDTO dto) {
-        AutorResponseDTO response = autorService.criar(dto);
-        return ResponseEntity.ok(response);
-    }
-
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<AutorResponseDTO>> listarTodos() {
         return ResponseEntity.ok(autorService.listarTodos());
     }
@@ -34,13 +28,19 @@ public class AutorController {
         return ResponseEntity.ok(autorService.buscarPorId(id));
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/adicionar")
+    public ResponseEntity<AutorResponseDTO> criar(@RequestBody AutorRequestDTO dto) {
+        AutorResponseDTO response = autorService.criar(dto);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<AutorResponseDTO> atualizar(@PathVariable Long id, @RequestBody AutorRequestDTO dto) {
         AutorResponseDTO response = autorService.atualizar(id, dto);
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/remover/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         autorService.deletar(id);
         return ResponseEntity.noContent().build();
