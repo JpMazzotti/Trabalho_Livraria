@@ -3,6 +3,8 @@ package br.com.escola.biblioteca.controller;
 import br.com.escola.biblioteca.dto.LivroRequestDTO;
 import br.com.escola.biblioteca.dto.LivroResponseDTO;
 import br.com.escola.biblioteca.service.LivroService;
+import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,13 +31,13 @@ public class LivroController {
     }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<LivroResponseDTO> criar(@RequestBody LivroRequestDTO dto) {
+    public ResponseEntity<LivroResponseDTO> criar(@RequestBody @Valid LivroRequestDTO dto) {
         LivroResponseDTO response = livroService.salvandoLivro(dto);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<LivroResponseDTO> atualizar(@PathVariable Long id, @RequestBody LivroRequestDTO dto) {
+    public ResponseEntity<LivroResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid LivroRequestDTO dto) {
         LivroResponseDTO response = livroService.atualizar(id, dto);
         return ResponseEntity.ok(response);
     }

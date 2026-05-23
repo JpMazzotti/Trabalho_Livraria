@@ -1,9 +1,11 @@
 package br.com.escola.biblioteca.dto;
 
+import java.time.LocalDate;
+
 public record LivroRequestDTO(
     String titulo,
     String isbn,
-    Integer anoPublicacao,
+    LocalDate anoPublicacao,
     String genero,
     Long autorId
 ) {}

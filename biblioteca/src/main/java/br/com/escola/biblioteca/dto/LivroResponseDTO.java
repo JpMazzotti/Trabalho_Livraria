@@ -1,12 +1,15 @@
 package br.com.escola.biblioteca.dto;
 
+import java.time.LocalDate;
+
+
 import br.com.escola.biblioteca.entity.Livro;
 
 public record LivroResponseDTO(
     Long id,
     String titulo,
     String isbn,
-    Integer anoPublicacao,
+    LocalDate anoPublicacao,
     String genero,
     Long autorId,
     String autorNome

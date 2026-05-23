@@ -3,6 +3,8 @@ package br.com.escola.biblioteca.controller;
 import br.com.escola.biblioteca.dto.AutorRequestDTO;
 import br.com.escola.biblioteca.dto.AutorResponseDTO;
 import br.com.escola.biblioteca.service.AutorService;
+import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,13 +31,13 @@ public class AutorController {
     }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<AutorResponseDTO> criar(@RequestBody AutorRequestDTO dto) {
+    public ResponseEntity<AutorResponseDTO> criar(@RequestBody @Valid AutorRequestDTO dto) {
         AutorResponseDTO response = autorService.criar(dto);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<AutorResponseDTO> atualizar(@PathVariable Long id, @RequestBody AutorRequestDTO dto) {
+    public ResponseEntity<AutorResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid AutorRequestDTO dto) {
         AutorResponseDTO response = autorService.atualizar(id, dto);
         return ResponseEntity.ok(response);
     }
