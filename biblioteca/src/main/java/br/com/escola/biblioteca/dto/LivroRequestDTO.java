@@ -1,5 +1,9 @@
 package br.com.escola.biblioteca.dto;
 
-public class LivroRequestDTO {
-    
-}
+public record LivroRequestDTO(
+    String titulo,
+    String isbn,
+    Integer anoPublicacao,
+    String genero,
+    Long autorId
+) {}
