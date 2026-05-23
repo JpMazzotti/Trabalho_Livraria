@@ -1,7 +1,12 @@
 package br.com.escola.biblioteca.entity;
 
+import java.time.LocalDate;
+
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 
 
 @Entity
@@ -13,16 +18,21 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message ="Não permitido título vazio")
+
     @Column(name = "titulo",nullable = false)
     private String titulo;
 
+
+    @NotBlank(message = "O codigo do livro nao pode estar em branco")
     @Column(name = "isbn")
     private String isbn;
+    
+    @Past(message = "A data de publicação precisa estar no passado")
+    @NotNull(message = "O Ano publicado devde exitir")
+    @Column(name = "anoPublicacao",nullable = false)
+    private LocalDate anoPublicacao;
 
-    @Column(name = "anoPublicacao")
-    private Integer anoPublicacao;
-
+    @NotBlank(message = "O genero precisa ser preenchido")
     @Column(name ="genero")
     private String genero;
 
@@ -32,7 +42,7 @@ public class Livro {
 
     public Livro() {}
 
-    public Livro(String titulo, String isbn, Integer anoPublicacao, String genero, Autor autor) {
+    public Livro(String titulo, String isbn, LocalDate anoPublicacao, String genero, Autor autor) {
         this.titulo = titulo;
         this.isbn = isbn;
         this.anoPublicacao = anoPublicacao;
@@ -49,8 +59,8 @@ public class Livro {
     public String getIsbn() { return isbn; }
     public void setIsbn(String isbn) { this.isbn = isbn; }
 
-    public Integer getAnoPublicacao() { return anoPublicacao; }
-    public void setAnoPublicacao(Integer anoPublicacao) { this.anoPublicacao = anoPublicacao; }
+    public LocalDate getAnoPublicacao() { return anoPublicacao; }
+    public void setAnoPublicacao(LocalDate anoPublicacao) { this.anoPublicacao = anoPublicacao; }
 
     public String getGenero() { return genero; }
     public void setGenero(String genero) { this.genero = genero; }
