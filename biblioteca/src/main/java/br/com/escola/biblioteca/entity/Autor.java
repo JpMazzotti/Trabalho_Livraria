@@ -16,11 +16,13 @@ public class Autor {
     private Long autor_id;
 
     @NotBlank(message = "O nome nao pode estar vazio")
-    @Column(nullable = false) 
+    @Column(name = "nome",nullable = false, length = 30 ) 
     private String nome;
 
+    @Column(name = "nacionalidade")
     private String nacionalidade;
-
+    
+    @Column(name =" data_Nascimento",nullable = false)
     private LocalDate dataNascimento;
 
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, orphanRemoval = true)
