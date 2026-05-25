@@ -18,7 +18,7 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @NotBlank(message = "O titulo nao pode estar em branco")
     @Column(name = "titulo",nullable = false)
     private String titulo;
 
