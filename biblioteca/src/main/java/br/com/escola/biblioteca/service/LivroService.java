@@ -11,7 +11,6 @@ import br.com.escola.biblioteca.entity.Livro;
 import br.com.escola.biblioteca.exception.AutorInesistenteException;
 import br.com.escola.biblioteca.exception.LivroNaoEncontradoException;
 import br.com.escola.biblioteca.exception.LivroSemAutorException;
-import br.com.escola.biblioteca.exception.LivroTituloNaoNuloException;
 import br.com.escola.biblioteca.repository.AutorRepository;
 import br.com.escola.biblioteca.repository.LivroRepository;
 
@@ -34,9 +33,7 @@ public class LivroService {
         Autor autor = autorRepository.findById(dto.autorId())
                 .orElseThrow(() -> new AutorInesistenteException());
 
-        if (dto.titulo() == null || dto.titulo().trim().isEmpty()) {
-            throw new LivroTituloNaoNuloException();
-        }
+        
 
         Livro livro = new Livro();
         livro.setTitulo(dto.titulo());
@@ -76,10 +73,7 @@ public class LivroService {
         Autor autor = autorRepository.findById(dto.autorId())
                 .orElseThrow(() -> new AutorInesistenteException());
 
-        if (dto.titulo() == null || dto.titulo().trim().isEmpty()) {
-            throw new LivroTituloNaoNuloException();
-        }
-
+       
         livroExistente.setTitulo(dto.titulo());
         livroExistente.setIsbn(dto.isbn());
         livroExistente.setAnoPublicacao(dto.anoPublicacao());

@@ -30,7 +30,7 @@ public class Autor {
     @Column(name = "dataNascimento",nullable = false)
     private LocalDate dataNascimento;
 
-    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "autor")
     private List<Livro> livros = new ArrayList<>();
 
   
