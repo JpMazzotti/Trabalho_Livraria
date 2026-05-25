@@ -24,7 +24,7 @@ public class Livro {
 
 
     @NotBlank(message = "O codigo do livro nao pode estar em branco")
-    @Column(name = "isbn")
+    @Column(name = "isbn",nullable = false)
     private String isbn;
     
     @Past(message = "A data de publicação precisa estar no passado")
@@ -33,7 +33,7 @@ public class Livro {
     private LocalDate anoPublicacao;
 
     @NotBlank(message = "O genero precisa ser preenchido")
-    @Column(name ="genero")
+    @Column(name ="genero", nullable = false)
     private String genero;
 
     @ManyToOne

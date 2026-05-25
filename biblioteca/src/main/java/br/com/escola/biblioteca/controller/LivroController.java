@@ -5,6 +5,7 @@ import br.com.escola.biblioteca.dto.LivroResponseDTO;
 import br.com.escola.biblioteca.service.LivroService;
 import jakarta.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +34,8 @@ public class LivroController {
     @PostMapping("/adicionar")
     public ResponseEntity<LivroResponseDTO> criar(@RequestBody @Valid LivroRequestDTO dto) {
         LivroResponseDTO response = livroService.salvandoLivro(dto);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
     }
 
     @PutMapping("/atualizar/{id}")

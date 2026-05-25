@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class ValidationExceptionHandler {
+public class ValidacaoExceptionHandler {
 
     
     @ExceptionHandler(MethodArgumentNotValidException.class)
