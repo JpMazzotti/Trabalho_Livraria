@@ -22,7 +22,7 @@ public class Autor {
     private String nome;
 
     @NotBlank(message = "A nacionalidade nao pode estar vazia")
-    @Column(name = "nacionalidade")
+    @Column(name = "nacionalidade" , nullable = false)
     private String nacionalidade;
     
     @NotNull(message = "A data nao pode estar vazia")
