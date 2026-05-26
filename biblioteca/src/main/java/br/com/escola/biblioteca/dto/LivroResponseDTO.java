@@ -10,7 +10,6 @@ public record LivroResponseDTO(
     String titulo,
     String isbn,
     LocalDate anoPublicacao,
-    String genero,
     Long autorId,
     String autorNome
 ) {
@@ -20,7 +19,6 @@ public record LivroResponseDTO(
             livro.getTitulo(),
             livro.getIsbn(),
             livro.getAnoPublicacao(),
-            livro.getGenero(),
             livro.getAutor().getId(),
             livro.getAutor().getNome()
         );
