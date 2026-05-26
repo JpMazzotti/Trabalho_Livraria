@@ -15,7 +15,8 @@ public class Autor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long autor_id;
+    @Column(name = "id_autor" )
+    private Long id;
 
     @NotBlank(message = "O nome nao pode estar vazio")
     @Column(name = "nome",nullable = false, length = 30 ) 
@@ -44,11 +45,11 @@ public class Autor {
 
    
     public Long getId() {
-        return autor_id;
+        return id;
     }
 
     public void setId(Long id) {
-        this.autor_id = id;
+        this.id = id;
     }
 
     public String getNome() {
