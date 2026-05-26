@@ -39,7 +39,6 @@ public class LivroService {
         livro.setTitulo(dto.titulo());
         livro.setIsbn(dto.isbn());
         livro.setAnoPublicacao(dto.anoPublicacao());
-        livro.setGenero(dto.genero());
         livro.setAutor(autor);
 
         Livro livroSalvo = livroRepository.save(livro);
@@ -77,7 +76,6 @@ public class LivroService {
         livroExistente.setTitulo(dto.titulo());
         livroExistente.setIsbn(dto.isbn());
         livroExistente.setAnoPublicacao(dto.anoPublicacao());
-        livroExistente.setGenero(dto.genero());
         livroExistente.setAutor(autor);
 
         Livro livroAtualizado = livroRepository.save(livroExistente);

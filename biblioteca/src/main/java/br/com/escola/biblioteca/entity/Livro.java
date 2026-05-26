@@ -32,21 +32,17 @@ public class Livro {
     @Column(name = "anoPublicacao",nullable = false)
     private LocalDate anoPublicacao;
 
-    @NotBlank(message = "O genero precisa ser preenchido")
-    @Column(name ="genero", nullable = false)
-    private String genero;
-
+    
     @ManyToOne
     @JoinColumn(name = "autor_id", nullable = false) 
     private Autor autor;
 
     public Livro() {}
 
-    public Livro(String titulo, String isbn, LocalDate anoPublicacao, String genero, Autor autor) {
+    public Livro(String titulo, String isbn, LocalDate anoPublicacao, Autor autor) {
         this.titulo = titulo;
         this.isbn = isbn;
         this.anoPublicacao = anoPublicacao;
-        this.genero = genero;
         this.autor = autor;
     }
 
@@ -61,9 +57,6 @@ public class Livro {
 
     public LocalDate getAnoPublicacao() { return anoPublicacao; }
     public void setAnoPublicacao(LocalDate anoPublicacao) { this.anoPublicacao = anoPublicacao; }
-
-    public String getGenero() { return genero; }
-    public void setGenero(String genero) { this.genero = genero; }
 
     public Autor getAutor() { return autor; }
     public void setAutor(Autor autor) { this.autor = autor; }
