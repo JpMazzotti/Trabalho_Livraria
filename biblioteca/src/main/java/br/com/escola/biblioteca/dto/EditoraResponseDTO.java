@@ -5,4 +5,4 @@ public record EditoraResponseDTO(
         String nome,
         String cnpj,
         String estado
-) { }
+){}
