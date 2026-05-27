@@ -28,14 +28,14 @@ public class Genero {
     @OneToMany(mappedBy = "genero")
     private List<Livro> livros = new ArrayList<>();
 
-    public Genero() {}
+    public Genero() {
+    }
 
     public Genero(String nome, String sigla) {
         this.nome = nome;
         this.sigla = sigla;
     }
 
-   
     public Long getId() {
         return id;
     }
@@ -59,6 +59,12 @@ public class Genero {
     public void setSigla(String sigla) {
         this.sigla = sigla;
     }
+
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
+    }
 }
-
-

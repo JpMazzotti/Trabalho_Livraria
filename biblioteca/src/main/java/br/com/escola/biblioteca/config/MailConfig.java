@@ -1,31 +1,22 @@
 package br.com.escola.biblioteca.config;
 
-
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
+
 @Configuration
 public class MailConfig {
 
-    private final JavaMailSender javaMailSender;
+    @Autowired
+    private JavaMailSender mailSender;
 
-    @Value("${spring.mail.username}")
-    private String remetente;
-
-    public MailConfig(JavaMailSender javaMailSender) {
-        this.javaMailSender = javaMailSender;
-    }
-
-    public void sendEmail(String para, String assunto, String texto) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(remetente);
-        message.setTo(para);
-        message.setSubject(assunto);
-        message.setText(texto);
-
-        javaMailSender.send(message);
+    public void enviarEmail(String destinatario, String assunto, String mensagem) {
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(destinatario);
+        email.setSubject(assunto);
+        email.setText(mensagem);
+        mailSender.send(email);
     }
 }
-
