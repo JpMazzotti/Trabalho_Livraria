@@ -14,4 +14,5 @@ public record EditoraRequestDTO(
 
         @NotBlank(message = "O campo 'estado' é obrigatório.")
         @Size(min = 2, max = 2, message = "O campo 'estado' deve conter 2 caracteres(Ex: RJ, MG).")
+        String estado
 ) {}
