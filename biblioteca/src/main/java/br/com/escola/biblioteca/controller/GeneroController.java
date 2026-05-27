@@ -25,13 +25,7 @@ public class GeneroController {
         this.generoService = generoService;
     }
 
-    @PostMapping
-    @Operation(summary = "Cadastrar novo gênero (ex: Romance = ROM)")
-    public ResponseEntity<GeneroResponseDTO> criar(@Valid @RequestBody GeneroRequestDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(generoService.criar(dto));
-    }
-
-    @GetMapping
+    @GetMapping("/listar")
     @Operation(summary = "Listar todos os gêneros")
     public ResponseEntity<List<GeneroResponseDTO>> listarTodos() {
         return ResponseEntity.ok(generoService.listarTodos());
@@ -43,14 +37,20 @@ public class GeneroController {
         return ResponseEntity.ok(generoService.buscarPorId(id));
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/adicionar")
+    @Operation(summary = "Cadastrar novo gênero (ex: Romance = ROM)")
+    public ResponseEntity<GeneroResponseDTO> criar(@Valid @RequestBody GeneroRequestDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(generoService.criar(dto));
+    }
+
+    @PutMapping("/atualizar/{id}")
     @Operation(summary = "Atualizar gênero por ID")
     public ResponseEntity<GeneroResponseDTO> atualizar(
             @PathVariable Long id, @Valid @RequestBody GeneroRequestDTO dto) {
         return ResponseEntity.ok(generoService.atualizar(id, dto));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/remover/{id}")
     @Operation(summary = "Deletar gênero por ID (bloqueado se houver livros vinculados)")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         generoService.deletar(id);
