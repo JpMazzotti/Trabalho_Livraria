@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.escola.biblioteca.config.MailConfig;
 import br.com.escola.biblioteca.dto.LivroRequestDTO;
 import br.com.escola.biblioteca.dto.LivroResponseDTO;
 import br.com.escola.biblioteca.entity.Autor;
@@ -16,7 +17,6 @@ import br.com.escola.biblioteca.repository.AutorRepository;
 import br.com.escola.biblioteca.repository.EditoraRepository;
 import br.com.escola.biblioteca.repository.GeneroRepository;
 import br.com.escola.biblioteca.repository.LivroRepository;
-
 
 @Service
 public class LivroService {
@@ -33,20 +33,18 @@ public class LivroService {
     @Autowired
     private GeneroRepository generoRepository;
 
+    @Autowired
+    private MailConfig emailConfig;
+
     public LivroResponseDTO salvandoLivro(LivroRequestDTO dto) {
-
-        if (dto.autorId() == null || dto.editoraId() == null || dto.generoId() == null) {
-            throw new ("Livro precisa ter Autor, Editora e Gênero obrigatoriamente.");
-        }
-
         Autor autor = autorRepository.findById(dto.autorId())
                 .orElseThrow(() -> new AutorInesistenteException());
 
         Editora editora = editoraRepository.findById(dto.editoraId())
-                .orElseThrow(() -> new("Editora inexistente"));
+                .orElseThrow(() -> new RuntimeException("Editora inexistente"));
 
         Genero genero = generoRepository.findById(dto.generoId())
-                .orElseThrow(() -> new ("Gênero inexistente"));
+                .orElseThrow(() -> new RuntimeException("Gênero inexistente"));
 
         Livro livro = new Livro();
         livro.setTitulo(dto.titulo());
@@ -57,6 +55,13 @@ public class LivroService {
         livro.setGenero(genero);
 
         Livro livroSalvo = livroRepository.save(livro);
+
+        
+        emailConfig.enviarEmail(
+            "destinatario@exemplo.com",
+            "Novo livro cadastrado",
+            "O livro '" + livroSalvo.getTitulo() + "' foi cadastrado com sucesso."
+        );
 
         return LivroResponseDTO.fromEntity(livroSalvo);
     }
@@ -76,7 +81,6 @@ public class LivroService {
     }
 
     public LivroResponseDTO atualizar(Long id, LivroRequestDTO dto) {
-
         Livro livroExistente = livroRepository.findById(id)
                 .orElseThrow(() -> new LivroNaoEncontradoException(id));
 
@@ -84,10 +88,10 @@ public class LivroService {
                 .orElseThrow(() -> new AutorInesistenteException());
 
         Editora editora = editoraRepository.findById(dto.editoraId())
-                .orElseThrow(() -> new("Editora inexistente"));
+                .orElseThrow(() -> new RuntimeException("Editora inexistente"));
 
         Genero genero = generoRepository.findById(dto.generoId())
-                .orElseThrow(() -> new ("Gênero inexistente"));
+                .orElseThrow(() -> new RuntimeException("Gênero inexistente"));
 
         livroExistente.setTitulo(dto.titulo());
         livroExistente.setIsbn(dto.isbn());
@@ -97,6 +101,14 @@ public class LivroService {
         livroExistente.setGenero(genero);
 
         Livro livroAtualizado = livroRepository.save(livroExistente);
+
+        
+        emailConfig.enviarEmail(
+            "destinatario@exemplo.com",
+            "Livro atualizado",
+            "O livro '" + livroAtualizado.getTitulo() + "' foi atualizado com sucesso."
+        );
+
         return LivroResponseDTO.fromEntity(livroAtualizado);
     }
 
@@ -105,15 +117,12 @@ public class LivroService {
                 .orElseThrow(() -> new LivroNaoEncontradoException(id));
 
         livroRepository.delete(livro);
+
+        
+        emailConfig.enviarEmail(
+            "destinatario@exemplo.com",
+            "Livro excluído",
+            "O livro '" + livro.getTitulo() + "' foi excluído do sistema."
+        );
     }
 }
-
-
-
-
-
-
-
-
-
-
