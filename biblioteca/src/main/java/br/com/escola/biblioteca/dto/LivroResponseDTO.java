@@ -7,7 +7,7 @@ public record LivroResponseDTO(
     Long id,
     String titulo,
     String isbn,
-    LocalDate anoPublicacao,
+    Integer anoPublicacao,
     String genero,
     Long autorId,
     String autorNome,
