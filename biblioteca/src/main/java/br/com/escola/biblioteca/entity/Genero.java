@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "genero")
@@ -16,12 +14,9 @@ public class Genero {
     @Column(name = "id_genero")
     private Long id;
 
-    @NotBlank(message = "O nome do gênero é obrigatório")
     @Column(name = "nome", nullable = false, length = 50)
     private String nome;
 
-    @NotBlank(message = "A sigla é obrigatória")
-    @Size(min = 3, max = 3, message = "A sigla deve ter exatamente 3 caracteres")
     @Column(name = "sigla", nullable = false, length = 3, unique = true)
     private String sigla;
 

@@ -1,9 +1,6 @@
 package br.com.escola.biblioteca.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,17 +13,12 @@ public class Editora {
     @Column(name = "id_editora")
     private Long id;
 
-    @NotBlank(message = "O nome da editora é obrigatório")
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @NotBlank(message = "O CNPJ é obrigatório")
-    @Pattern(regexp = "\\d{14}", message = "O CNPJ deve ter exatamente 14 dígitos numéricos")
     @Column(name = "cnpj", nullable = false, length = 14, unique = true)
     private String cnpj;
 
-    @NotBlank(message = "O estado é obrigatório")
-    @Size(min = 2, max = 3, message = "O estado deve ter 2 ou 3 caracteres")
     @Column(name = "estado", nullable = false, length = 3)
     private String estado;
 
