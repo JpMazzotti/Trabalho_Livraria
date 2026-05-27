@@ -1,6 +1,8 @@
 package br.com.escola.biblioteca.service;
 
 import br.com.escola.biblioteca.entity.Editora;
+import br.com.escola.biblioteca.exception.EditoraNaoEncontradaException;
+import br.com.escola.biblioteca.exception.ExclusaoNaoPermitidaException;
 import br.com.escola.biblioteca.repository.EditoraRepository; 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +25,7 @@ public class EditoraService {
     @Transactional(readOnly = true)
     public Editora buscarPorId(Long id) {
         return editoraRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Editora não encontrada com o ID: " + id));
+            .orElseThrow(() -> new EditoraNaoEncontradaException());
     }
 
     @Transactional
@@ -43,10 +45,10 @@ public class EditoraService {
     @Transactional
     public void deletar(Long id) {
         Editora editora = editoraRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Editora não encontrada."));
+            .orElseThrow(() -> new EditoraNaoEncontradaException());
 
         if (!editora.getLivros().isEmpty()) {
-            throw new RuntimeException("Não é possível excluir a editora pois existem livros vinculados a ela.");
+            throw new ExclusaoNaoPermitidaException("Não é possível excluir a editora pois existem livros vinculados a ela.");
         }
 
         editoraRepository.delete(editora);

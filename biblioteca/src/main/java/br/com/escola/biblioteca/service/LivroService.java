@@ -11,7 +11,10 @@ import br.com.escola.biblioteca.entity.Editora;
 import br.com.escola.biblioteca.entity.Genero;
 import br.com.escola.biblioteca.entity.Livro;
 import br.com.escola.biblioteca.exception.AutorInesistenteException;
+import br.com.escola.biblioteca.exception.EditoraNaoEncontradaException;
+import br.com.escola.biblioteca.exception.LivroDependenciasAusentesException;
 import br.com.escola.biblioteca.exception.LivroNaoEncontradoException;
+import br.com.escola.biblioteca.exception.GeneroNaoEncontradoException;
 import br.com.escola.biblioteca.repository.AutorRepository;
 import br.com.escola.biblioteca.repository.EditoraRepository;
 import br.com.escola.biblioteca.repository.GeneroRepository;
@@ -36,17 +39,17 @@ public class LivroService {
     public LivroResponseDTO salvandoLivro(LivroRequestDTO dto) {
 
         if (dto.autorId() == null || dto.editoraId() == null || dto.generoId() == null) {
-            throw new ("Livro precisa ter Autor, Editora e Gênero obrigatoriamente.");
+            throw new LivroDependenciasAusentesException();
         }
 
         Autor autor = autorRepository.findById(dto.autorId())
                 .orElseThrow(() -> new AutorInesistenteException());
 
         Editora editora = editoraRepository.findById(dto.editoraId())
-                .orElseThrow(() -> new("Editora inexistente"));
+                .orElseThrow(() -> new EditoraNaoEncontradaException());
 
         Genero genero = generoRepository.findById(dto.generoId())
-                .orElseThrow(() -> new ("Gênero inexistente"));
+                .orElseThrow(() -> new GeneroNaoEncontradoException());
 
         Livro livro = new Livro();
         livro.setTitulo(dto.titulo());
@@ -84,10 +87,10 @@ public class LivroService {
                 .orElseThrow(() -> new AutorInesistenteException());
 
         Editora editora = editoraRepository.findById(dto.editoraId())
-                .orElseThrow(() -> new("Editora inexistente"));
+                .orElseThrow(() -> new EditoraNaoEncontradaException());
 
         Genero genero = generoRepository.findById(dto.generoId())
-                .orElseThrow(() -> new ("Gênero inexistente"));
+                .orElseThrow(() -> new GeneroNaoEncontradoException());
 
         livroExistente.setTitulo(dto.titulo());
         livroExistente.setIsbn(dto.isbn());
