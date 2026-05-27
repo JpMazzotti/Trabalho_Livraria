@@ -15,7 +15,7 @@ public record LivroRequestDTO(
 
         @Past(message = "A data de publicação precisa estar no passado")
         @NotNull(message = "O ano de publicação deve existir")
-        LocalDate anoPublicacao,
+        Integer anoPublicacao,
 
         @NotNull(message = "O ID do autor é obrigatório")
         Long autorId,

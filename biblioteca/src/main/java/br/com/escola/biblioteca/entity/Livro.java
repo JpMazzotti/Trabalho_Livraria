@@ -19,7 +19,7 @@ public class Livro {
     private String isbn;
 
     @Column(name = "ano_publicacao", nullable = false)
-    private LocalDate anoPublicacao;
+    private Integer anoPublicacao;
 
     @ManyToOne
     @JoinColumn(name = "id_editora", nullable = false)
@@ -36,7 +36,7 @@ public class Livro {
     public Livro() {
     }
 
-    public Livro(String titulo, String isbn, LocalDate anoPublicacao, Autor autor, Editora editora, Genero genero) {
+    public Livro(String titulo, String isbn, Integer anoPublicacao, Autor autor, Editora editora, Genero genero) {
         this.titulo = titulo;
         this.isbn = isbn;
         this.anoPublicacao = anoPublicacao;
@@ -70,11 +70,11 @@ public class Livro {
         this.isbn = isbn;
     }
 
-    public LocalDate getAnoPublicacao() {
+    public Integer getAnoPublicacao() {
         return anoPublicacao;
     }
 
-    public void setAnoPublicacao(LocalDate anoPublicacao) {
+    public void setAnoPublicacao(Integer anoPublicacao) {
         this.anoPublicacao = anoPublicacao;
     }
 
