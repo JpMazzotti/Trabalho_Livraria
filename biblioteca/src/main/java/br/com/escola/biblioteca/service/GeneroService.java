@@ -3,6 +3,7 @@ package br.com.escola.biblioteca.service;
 import br.com.escola.biblioteca.dto.GeneroRequestDTO;
 import br.com.escola.biblioteca.dto.GeneroResponseDTO;
 import br.com.escola.biblioteca.entity.Genero;
+import br.com.escola.biblioteca.exception.ExclusaoNaoPermitidaException;
 import br.com.escola.biblioteca.exception.GeneroNaoEncontradoException;
 import br.com.escola.biblioteca.repository.GeneroRepository;
 import org.springframework.stereotype.Service;
@@ -56,13 +57,10 @@ public class GeneroService {
         Genero genero = generoRepository.findById(id)
                 .orElseThrow(() -> new GeneroNaoEncontradoException());
 
-        if (!genero.getLivros().isEmpty())
-      
-        {
-            throw new RuntimeException(
-                "Não é possível excluir o gênero '" + genero.getNome() +
-                "' pois existem livros vinculados a ele."
-            );
+        if (!genero.getLivros().isEmpty()) {
+            
+            throw new ExclusaoNaoPermitidaException(
+                "Não é possível excluir o gênero pois existem livros vinculados a ele.");
         }
 
         generoRepository.deleteById(id);
