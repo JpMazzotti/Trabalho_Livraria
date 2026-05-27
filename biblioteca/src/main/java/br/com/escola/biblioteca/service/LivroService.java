@@ -64,12 +64,23 @@ public class LivroService {
 
         Livro livroSalvo = livroRepository.save(livro);
 
-        
-        emailConfig.enviarEmail(
-            "jricken@faeterj-petropolis.edu.br",
-            "Novo livro cadastrado",
-            "O livro '" + livroSalvo.getTitulo() + "' foi cadastrado com sucesso."
-        );
+      
+    emailConfig.enviarEmail(
+        "jricken@faeterj-petropolis.edu.br",
+        "Novo livro cadastrado",
+        """
+        <html>
+          <body style="font-family: Arial, sans-serif; background-color:#c8e6c9; padding:20px; color:#333;">
+            <h2 style="text-align:center;">📚 Novo Livro Cadastrado</h2>
+            <p>Um novo livro foi adicionado ao sistema da biblioteca:</p>
+            <p><b>Título:</b> """ + livroSalvo.getTitulo() + """
+            </p>
+            <p style="text-align:center; color:#555;">Obrigado por utilizar nosso sistema de gerenciamento de livros.</p>
+          </body>
+        </html>
+        """
+    );
+
 
         return LivroResponseDTO.fromEntity(livroSalvo);
     }
@@ -110,27 +121,46 @@ public class LivroService {
 
         Livro livroAtualizado = livroRepository.save(livroExistente);
 
-        
         emailConfig.enviarEmail(
-            "jricken@faeterj-petropolis.edu.br",
-            "Livro atualizado",
-            "O livro '" + livroAtualizado.getTitulo() + "' foi atualizado com sucesso."
-        );
+        "jricken@faeterj-petropolis.edu.br",
+        "Livro atualizado",
+        """
+        <html>
+          <body style="font-family: Arial, sans-serif; background-color:#c8e6c9; padding:20px; color:#333;">
+            <h2 style="text-align:center;">✏️ Livro Atualizado</h2>
+            <p>As informações do livro foram atualizadas com sucesso:</p>
+            <p><b>Título:</b> """ + livroAtualizado.getTitulo() + """
+            </p>
+            <p style="text-align:center; color:#555;">Obrigado por manter o sistema sempre atualizado.</p>
+          </body>
+        </html>
+        """
+    );
 
         return LivroResponseDTO.fromEntity(livroAtualizado);
     }
 
-    public void deletar(Long id) {
-        Livro livro = livroRepository.findById(id)
-                .orElseThrow(() -> new LivroNaoEncontradoException(id));
+   public void deletar(Long id) {
+    Livro livro = livroRepository.findById(id)
+            .orElseThrow(() -> new LivroNaoEncontradoException(id));
 
-        livroRepository.delete(livro);
+    livroRepository.delete(livro);
 
-        
-        emailConfig.enviarEmail(
-            "jricken@faeterj-petropolis.edu.br",
-            "Livro excluído",
-            "O livro '" + livro.getTitulo() + "' foi excluído do sistema."
-        );
-    }
+  emailConfig.enviarEmail(
+        "jricken@faeterj-petropolis.edu.br",
+        "Livro excluído",
+        """
+        <html>
+          <body style="font-family: Arial, sans-serif; background-color:#c8e6c9; padding:20px; color:#333;">
+            <h2 style="text-align:center;">🗑️ Livro Removido</h2>
+            <p>O livro foi removido do sistema da biblioteca:</p>
+            <p><b>Título:</b> """ + livro.getTitulo() + """
+            </p>
+            <p style="text-align:center; color:#555;">Remoção concluída com sucesso.</p>
+          </body>
+        </html>
+        """
+    );
 }
+}
+
