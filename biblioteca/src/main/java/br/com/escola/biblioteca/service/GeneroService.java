@@ -37,13 +37,13 @@ public class GeneroService {
 
     public GeneroResponseDTO buscarPorId(Long id) {
         Genero genero = generoRepository.findById(id)
-                .orElseThrow(() -> new GeneroNaoEncontradoException(id));
+                .orElseThrow(() -> new GeneroNaoEncontradoException());
         return new GeneroResponseDTO(genero.getId(), genero.getNome(), genero.getSigla());
     }
 
     public GeneroResponseDTO atualizar(Long id, GeneroRequestDTO dto) {
         Genero genero = generoRepository.findById(id)
-                .orElseThrow(() -> new GeneroNaoEncontradoException(id));
+                .orElseThrow(() -> new GeneroNaoEncontradoException());
 
         genero.setNome(dto.nome());
         genero.setSigla(dto.sigla().toUpperCase());
@@ -54,9 +54,11 @@ public class GeneroService {
 
     public void deletar(Long id) {
         Genero genero = generoRepository.findById(id)
-                .orElseThrow(() -> new GeneroNaoEncontradoException(id));
+                .orElseThrow(() -> new GeneroNaoEncontradoException());
 
-        if (!genero.getLivros().isEmpty()) {
+        if (!genero.getLivros().isEmpty())
+        // Verificar aí se existem livros vinculados ao gênero usando o repository
+        {
             throw new RuntimeException(
                 "Não é possível excluir o gênero '" + genero.getNome() +
                 "' pois existem livros vinculados a ele."
@@ -68,6 +70,6 @@ public class GeneroService {
 
     public Genero buscarEntidadePorId(Long id) {
         return generoRepository.findById(id)
-                .orElseThrow(() -> new GeneroNaoEncontradoException(id));
+                .orElseThrow(() -> new GeneroNaoEncontradoException());
     }
 }
