@@ -17,7 +17,12 @@ public record LivroRequestDTO(
         @NotNull(message = "O ano de publicação deve existir")
         LocalDate anoPublicacao,
 
+        @NotNull(message = "O ID do autor é obrigatório")
         Long autorId,
+        
+        @NotNull(message = "O ID da editora é obrigatório")
         Long editoraId,
+        
+        @NotNull(message = "O ID do género é obrigatório")
         Long generoId) {
 }

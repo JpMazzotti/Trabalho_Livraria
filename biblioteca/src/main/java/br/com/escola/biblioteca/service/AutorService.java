@@ -4,6 +4,7 @@ import br.com.escola.biblioteca.dto.AutorRequestDTO;
 import br.com.escola.biblioteca.dto.AutorResponseDTO;
 import br.com.escola.biblioteca.entity.Autor;
 import br.com.escola.biblioteca.exception.AutorInesistenteException;
+import br.com.escola.biblioteca.exception.ExclusaoNaoPermitidaException;
 import br.com.escola.biblioteca.repository.AutorRepository;
 import org.springframework.stereotype.Service;
 
@@ -55,10 +56,14 @@ public class AutorService {
     }
 
     public void deletar(Long autor_id) {
-        if (!autorRepository.existsById(autor_id)) {
-            throw new AutorInesistenteException();
+        
+        Autor autor = autorRepository.findById(autor_id)
+                .orElseThrow(() -> new AutorInesistenteException());
+
+        if (!autor.getLivros().isEmpty()) {
+            throw new ExclusaoNaoPermitidaException("Não é possível excluir o autor, pois existem livros vinculados a ele.");
         }
-        autorRepository.deleteById(autor_id);
+        autorRepository.delete(autor);
     }
 
     public Autor buscarEntidadePorId(Long autor_id) {
