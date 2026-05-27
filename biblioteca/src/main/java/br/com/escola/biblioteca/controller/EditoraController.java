@@ -1,6 +1,7 @@
 package br.com.escola.biblioteca.controller;
 
-import br.com.escola.biblioteca.entity.Editora;
+import br.com.escola.biblioteca.dto.EditoraRequestDTO;
+import br.com.escola.biblioteca.dto.EditoraResponseDTO;
 import br.com.escola.biblioteca.service.EditoraService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -19,27 +20,24 @@ public class EditoraController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Editora>> listarTodas() {
-        List<Editora> lista = editoraService.listarTodas();
-        return ResponseEntity.ok(lista);
+    public ResponseEntity<List<EditoraResponseDTO>> listarTodas() {
+        return ResponseEntity.ok(editoraService.listarTodas());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Editora> buscarPorId(@PathVariable Long id) {
-        Editora editora = editoraService.buscarPorId(id);
-        return ResponseEntity.ok(editora);
+    public ResponseEntity<EditoraResponseDTO> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(editoraService.buscarPorId(id));
     }
 
     @PostMapping("/adicionar")
-    public ResponseEntity<Editora> criar(@Valid @RequestBody Editora novaEditora) {
-        Editora editora = editoraService.cadastrar(novaEditora);
-        return ResponseEntity.ok(editora);
+    public ResponseEntity<EditoraResponseDTO> criar(@Valid @RequestBody EditoraRequestDTO dto) {
+        return ResponseEntity.ok(editoraService.cadastrar(dto));
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<Editora> atualizar(@PathVariable Long id, @Valid @RequestBody Editora editoraAtualizada) {
-        Editora editora = editoraService.atualizar(id, editoraAtualizada);
-        return ResponseEntity.ok(editora);
+    public ResponseEntity<EditoraResponseDTO> atualizar(@PathVariable Long id,
+                                                        @Valid @RequestBody EditoraRequestDTO dto) {
+        return ResponseEntity.ok(editoraService.atualizar(id, dto));
     }
 
     @DeleteMapping("/remover/{id}")

@@ -57,7 +57,7 @@ public class GeneroService {
                 .orElseThrow(() -> new GeneroNaoEncontradoException());
 
         if (!genero.getLivros().isEmpty())
-        // Verificar aí se existem livros vinculados ao gênero usando o repository
+      
         {
             throw new RuntimeException(
                 "Não é possível excluir o gênero '" + genero.getNome() +

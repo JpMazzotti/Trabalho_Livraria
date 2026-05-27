@@ -1,9 +1,11 @@
 package br.com.escola.biblioteca.service;
 
+import br.com.escola.biblioteca.dto.EditoraRequestDTO;
+import br.com.escola.biblioteca.dto.EditoraResponseDTO;
 import br.com.escola.biblioteca.entity.Editora;
 import br.com.escola.biblioteca.exception.EditoraNaoEncontradaException;
 import br.com.escola.biblioteca.exception.ExclusaoNaoPermitidaException;
-import br.com.escola.biblioteca.repository.EditoraRepository; 
+import br.com.escola.biblioteca.repository.EditoraRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,34 +20,45 @@ public class EditoraService {
     }
 
     @Transactional(readOnly = true)
-    public List<Editora> listarTodas() {
-        return editoraRepository.findAll();
+    public List<EditoraResponseDTO> listarTodas() {
+        return editoraRepository.findAll()
+                .stream()
+                .map(EditoraResponseDTO::fromEntity)
+                .toList();
     }
 
     @Transactional(readOnly = true)
-    public Editora buscarPorId(Long id) {
-        return editoraRepository.findById(id)
-            .orElseThrow(() -> new EditoraNaoEncontradaException());
+    public EditoraResponseDTO buscarPorId(Long id) {
+        Editora editora = editoraRepository.findById(id)
+                .orElseThrow(EditoraNaoEncontradaException::new);
+        return EditoraResponseDTO.fromEntity(editora);
     }
 
     @Transactional
-    public Editora cadastrar(Editora editora) {
-        return editoraRepository.save(editora);
+    public EditoraResponseDTO cadastrar(EditoraRequestDTO dto) {
+        Editora editora = new Editora();
+        editora.setNome(dto.nome());
+        editora.setCnpj(dto.cnpj());
+        editora.setEstado(dto.estado());
+        return EditoraResponseDTO.fromEntity(editoraRepository.save(editora));
     }
 
     @Transactional
-    public Editora atualizar(Long id, Editora editoraAtualizada) {
-        Editora editoraExistente = buscarPorId(id); 
-        editoraExistente.setNome(editoraAtualizada.getNome());
-        editoraExistente.setCnpj(editoraAtualizada.getCnpj());
-        editoraExistente.setEstado(editoraAtualizada.getEstado());
-        return editoraRepository.save(editoraExistente);
+    public EditoraResponseDTO atualizar(Long id, EditoraRequestDTO dto) {
+        Editora editoraExistente = editoraRepository.findById(id)
+                .orElseThrow(EditoraNaoEncontradaException::new);
+
+        editoraExistente.setNome(dto.nome());
+        editoraExistente.setCnpj(dto.cnpj());
+        editoraExistente.setEstado(dto.estado());
+
+        return EditoraResponseDTO.fromEntity(editoraRepository.save(editoraExistente));
     }
 
     @Transactional
     public void deletar(Long id) {
         Editora editora = editoraRepository.findById(id)
-            .orElseThrow(() -> new EditoraNaoEncontradaException());
+                .orElseThrow(EditoraNaoEncontradaException::new);
 
         if (!editora.getLivros().isEmpty()) {
             throw new ExclusaoNaoPermitidaException("Não é possível excluir a editora pois existem livros vinculados a ela.");
