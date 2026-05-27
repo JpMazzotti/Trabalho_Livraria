@@ -126,7 +126,7 @@ public class LivroService {
         "Livro atualizado",
         """
         <html>
-          <body style="font-family: Arial, sans-serif; background-color:#c8e6c9; padding:20px; color:#333;">
+          <body style="font-family: Arial, sans-serif; background-color:#90caf9; padding:20px; color:#333;">
             <h2 style="text-align:center;">✏️ Livro Atualizado</h2>
             <p>As informações do livro foram atualizadas com sucesso:</p>
             <p><b>Título:</b> """ + livroAtualizado.getTitulo() + """
@@ -151,7 +151,7 @@ public class LivroService {
         "Livro excluído",
         """
         <html>
-          <body style="font-family: Arial, sans-serif; background-color:#c8e6c9; padding:20px; color:#333;">
+          <body style="font-family: Arial, sans-serif; background-color:#e57373; padding:20px; color:#333;">
             <h2 style="text-align:center;">🗑️ Livro Removido</h2>
             <p>O livro foi removido do sistema da biblioteca:</p>
             <p><b>Título:</b> """ + livro.getTitulo() + """
