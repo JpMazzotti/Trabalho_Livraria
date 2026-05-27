@@ -1,6 +1,5 @@
 package br.com.escola.biblioteca.entity;
 
-import java.time.LocalDate;
 import jakarta.persistence.*;
 
 @Entity
