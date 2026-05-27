@@ -1,9 +1,6 @@
 package br.com.escola.biblioteca.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,16 +15,12 @@ public class Autor {
     @Column(name = "id_autor" )
     private Long id;
 
-    @NotBlank(message = "O nome nao pode estar vazio")
     @Column(name = "nome",nullable = false, length = 30 ) 
     private String nome;
 
-    @NotBlank(message = "A nacionalidade nao pode estar vazia")
     @Column(name = "nacionalidade" , nullable = false)
     private String nacionalidade;
     
-    @NotNull(message = "A data nao pode estar vazia")
-    @Past(message = "A data tem que estar no passado")
     @Column(name = "dataNascimento",nullable = false)
     private LocalDate dataNascimento;
 
