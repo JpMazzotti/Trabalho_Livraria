@@ -18,7 +18,7 @@ public class EditoraController {
         this.editoraService = editoraService;
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<Editora>> listarTodas() {
         List<Editora> lista = editoraService.listarTodas();
         return ResponseEntity.ok(lista);
@@ -36,13 +36,13 @@ public class EditoraController {
         return ResponseEntity.ok(editora);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<Editora> atualizar(@PathVariable Long id, @Valid @RequestBody Editora editoraAtualizada) {
         Editora editora = editoraService.atualizar(id, editoraAtualizada);
         return ResponseEntity.ok(editora);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/remover/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         editoraService.deletar(id);
         return ResponseEntity.noContent().build();
