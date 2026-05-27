@@ -12,6 +12,10 @@ public class MailConfig {
     @Autowired
     private JavaMailSender mailSender;
 
+      public MailConfig(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
+
     public void enviarEmail(String destinatario, String assunto, String mensagem) {
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(destinatario);

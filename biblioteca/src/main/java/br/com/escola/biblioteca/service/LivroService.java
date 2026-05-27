@@ -66,7 +66,7 @@ public class LivroService {
 
         
         emailConfig.enviarEmail(
-            "destinatario@exemplo.com",
+            "jricken@faeterj-petropolis.edu.br",
             "Novo livro cadastrado",
             "O livro '" + livroSalvo.getTitulo() + "' foi cadastrado com sucesso."
         );
@@ -112,7 +112,7 @@ public class LivroService {
 
         
         emailConfig.enviarEmail(
-            "destinatario@exemplo.com",
+            "jricken@faeterj-petropolis.edu.br",
             "Livro atualizado",
             "O livro '" + livroAtualizado.getTitulo() + "' foi atualizado com sucesso."
         );
@@ -128,7 +128,7 @@ public class LivroService {
 
         
         emailConfig.enviarEmail(
-            "destinatario@exemplo.com",
+            "jricken@faeterj-petropolis.edu.br",
             "Livro excluído",
             "O livro '" + livro.getTitulo() + "' foi excluído do sistema."
         );
