@@ -3,6 +3,7 @@ package br.com.escola.biblioteca.controller;
 import br.com.escola.biblioteca.dto.AutorRequestDTO;
 import br.com.escola.biblioteca.dto.AutorResponseDTO;
 import br.com.escola.biblioteca.service.AutorService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/autores")
+@SecurityRequirement(name = "bearerAuth")
 public class AutorController {
 
     private final AutorService autorService;
