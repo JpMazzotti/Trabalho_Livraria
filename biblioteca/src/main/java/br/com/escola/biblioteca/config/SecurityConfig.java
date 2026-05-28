@@ -38,7 +38,7 @@ public class SecurityConfig {
                     req.anyRequest().authenticated();
                 })
 
-                // Adc mais segurança antes do filtro padrão de autenticação do Java
+            
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

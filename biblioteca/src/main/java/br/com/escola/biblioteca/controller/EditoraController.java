@@ -3,6 +3,7 @@ package br.com.escola.biblioteca.controller;
 import br.com.escola.biblioteca.dto.EditoraRequestDTO;
 import br.com.escola.biblioteca.dto.EditoraResponseDTO;
 import br.com.escola.biblioteca.service.EditoraService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/editoras")
+@SecurityRequirement(name = "bearerAuth")
 public class EditoraController {
 
     private final EditoraService editoraService;
