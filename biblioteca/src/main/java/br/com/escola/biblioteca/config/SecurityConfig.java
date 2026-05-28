@@ -25,50 +25,34 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
 
-                // Desligar a proteção
                 .csrf(csrf -> csrf.disable())
-                
-                // Guardar o estado do user
+
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                
-                // ACL de cria
+
                 .authorizeHttpRequests(req -> {
-                    
-                    // Rota Login pública
+
                     req.requestMatchers(HttpMethod.POST, "/login").permitAll();
-                    
-                    // Rota Swagger pública
+
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
-                    
-                    // Exigir autenticação
+
                     req.anyRequest().authenticated();
                 })
-                
+
                 // Adc mais segurança antes do filtro padrão de autenticação do Java
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
-    //Exportar o authentication manager
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-    
+
         return configuration.getAuthenticationManager();
     }
 
-    //Configura hashing
-
     @Bean
     public PasswordEncoder passwordEncoder() {
-    
+
         return new BCryptPasswordEncoder();
     }
 
 }
-
-
-
-
-
-

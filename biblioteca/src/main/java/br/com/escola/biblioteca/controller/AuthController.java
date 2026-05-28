@@ -27,24 +27,13 @@ public class AuthController {
     @PostMapping
     public ResponseEntity<TokenResponseDTO> efetuarLogin(@RequestBody @Valid AutenticacaoDTO dados) {
 
-        // Empacota
         var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-        
-        // Chama o manager
+
         var authentication = manager.authenticate(authenticationToken);
 
-        // Se a senha bater, gera o JWT
         var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
 
-        // Empacota e devolve o Token num dto
         return ResponseEntity.ok(new TokenResponseDTO(tokenJWT));
     }
 
 }
-
-
-
-
-
-
-

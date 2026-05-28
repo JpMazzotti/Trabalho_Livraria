@@ -43,14 +43,14 @@ public class SecurityFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    // Método para extrair o token do cabeçalho http. Padrão -> Authorization: Bearer <e aqui fica o token>
+  
      
     private String recuperarToken(HttpServletRequest request) {
         String authorizationHeader = request.getHeader("Authorization");
         
         if (authorizationHeader != null) {
 
-            // Remover o que não é token
+          
             return authorizationHeader.replace("Bearer ", "").trim();
         }
         

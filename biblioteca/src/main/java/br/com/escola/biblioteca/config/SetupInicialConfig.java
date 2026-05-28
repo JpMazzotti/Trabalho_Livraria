@@ -21,12 +21,11 @@ public class SetupInicialConfig implements CommandLineRunner {
     public void run(String... args) throws Exception {
         String loginAdmin = "admin@biblioteca.com";
 
-        // Verifica se a tabela está vazia. Se estiver, injetamos o utilizador mestre!
+        
         if (usuarioRepository.findByLogin(loginAdmin) == null) {
             Usuario admin = new Usuario();
             admin.setLogin(loginAdmin);
             
-            // O próprio Spring gera a criptografia compatível com o seu ambiente
             admin.setSenha(passwordEncoder.encode("123456"));
 
             usuarioRepository.save(admin);
