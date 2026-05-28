@@ -47,7 +47,7 @@ public class TokenService {
         }
     }
 
-    // Tempo de expiração do token: 3 horas
+  
 
     private Instant gerarTempoExpiracao() {
         return LocalDateTime.now().plusHours(3).toInstant(ZoneOffset.of("-03:00"));

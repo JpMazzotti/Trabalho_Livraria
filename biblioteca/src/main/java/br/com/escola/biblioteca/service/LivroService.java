@@ -75,6 +75,10 @@ public class LivroService {
             <p>Um novo livro foi adicionado ao sistema da biblioteca:</p>
             <p><b>Título:</b> """ + livroSalvo.getTitulo() + """
             </p>
+            <p><b>ISBN:</b> """ + livroSalvo.getIsbn() + """
+            </p>
+        <p><b>Ano de Publicação:</b> """ + livroSalvo.getAnoPublicacao() + """
+        </p>
             <p style="text-align:center; color:#555;">Obrigado por utilizar nosso sistema de gerenciamento de livros.</p>
           </body>
         </html>
@@ -131,6 +135,10 @@ public class LivroService {
             <p>As informações do livro foram atualizadas com sucesso:</p>
             <p><b>Título:</b> """ + livroAtualizado.getTitulo() + """
             </p>
+            <p><b>ISBN:</b> """ + livroAtualizado.getIsbn() + """
+            </p>
+        <p><b>Ano de Publicação:</b> """ + livroAtualizado.getAnoPublicacao() + """
+        </p>
             <p style="text-align:center; color:#555;">Obrigado por manter o sistema sempre atualizado.</p>
           </body>
         </html>
@@ -156,6 +164,10 @@ public class LivroService {
             <p>O livro foi removido do sistema da biblioteca:</p>
             <p><b>Título:</b> """ + livro.getTitulo() + """
             </p>
+            <p><b>ISBN:</b> """ + livro.getIsbn() + """
+            </p>
+        <p><b>Ano de Publicação:</b> """ + livro.getAnoPublicacao() + """
+        </p>
             <p style="text-align:center; color:#555;">Remoção concluída com sucesso.</p>
           </body>
         </html>
