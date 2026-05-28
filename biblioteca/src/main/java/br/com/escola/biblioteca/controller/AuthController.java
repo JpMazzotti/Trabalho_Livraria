@@ -25,7 +25,7 @@ public class AuthController {
     private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity fazerLogin(@RequestBody @Valid AutenticacaoDTO dados) {
+    public ResponseEntity<TokenResponseDTO> efetuarLogin(@RequestBody @Valid AutenticacaoDTO dados) {
 
         // Empacota
         var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
@@ -39,7 +39,7 @@ public class AuthController {
         // Empacota e devolve o Token num dto
         return ResponseEntity.ok(new TokenResponseDTO(tokenJWT));
     }
-    
+
 }
 
 
