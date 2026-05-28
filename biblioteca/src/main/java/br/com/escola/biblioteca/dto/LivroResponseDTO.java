@@ -1,7 +1,7 @@
 package br.com.escola.biblioteca.dto;
 
 import br.com.escola.biblioteca.entity.Livro;
-import java.time.LocalDate;
+
 
 public record LivroResponseDTO(
     Long id,
