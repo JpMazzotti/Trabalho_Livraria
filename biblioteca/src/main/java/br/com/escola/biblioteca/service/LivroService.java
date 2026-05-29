@@ -66,7 +66,7 @@ public class LivroService {
 
       
     emailConfig.enviarEmail(
-        "jricken@faeterj-petropolis.edu.br",
+        "marcelo.collares@docente.firjan.senai.br",
         "Novo livro cadastrado",
         """
         <html>
@@ -126,7 +126,7 @@ public class LivroService {
         Livro livroAtualizado = livroRepository.save(livroExistente);
 
         emailConfig.enviarEmail(
-        "jricken@faeterj-petropolis.edu.br",
+        "marcelo.collares@docente.firjan.senai.br",
         "Livro atualizado",
         """
         <html>
@@ -155,7 +155,7 @@ public class LivroService {
     livroRepository.delete(livro);
 
   emailConfig.enviarEmail(
-        "jricken@faeterj-petropolis.edu.br",
+        "marcelo.collares@docente.firjan.senai.br",
         "Livro excluído",
         """
         <html>

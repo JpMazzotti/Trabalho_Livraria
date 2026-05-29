@@ -5,7 +5,6 @@ import br.com.escola.biblioteca.dto.GeneroResponseDTO;
 import br.com.escola.biblioteca.service.GeneroService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/generos")
-@Tag(name = "Gêneros", description = "Endpoints para gerenciamento de gêneros literários")
 @SecurityRequirement(name = "bearerAuth")
 public class GeneroController {
 
